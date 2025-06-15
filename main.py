@@ -4,4 +4,4 @@ def greet():
 
 
 def unused():
-    return "Not covered"
+    return "Not "
