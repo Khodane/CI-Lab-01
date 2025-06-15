@@ -1,3 +1,3 @@
-# main.py 
-def greet(): 
+# main.py
+def greet():
     return "Hello, CI!"
