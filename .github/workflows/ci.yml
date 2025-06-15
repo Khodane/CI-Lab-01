@@ -21,4 +21,9 @@ jobs:
       pip install pytest 
       
    - name: Run tests 
-     run: pytest 
+     run: pytest
+
+   - name: Run linter 
+     run: |
+      pip install flake8
+      flake8 .
