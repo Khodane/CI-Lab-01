@@ -1,0 +1,37 @@
+name: CD Python Artifact
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run tests
+        run: |
+          pip install -r requirements.txt
+          python -m unittest discover
+
+      - name: Create artifact directory
+        run: |
+          mkdir -p release
+          cp *.py release/
+
+      - name: Compress artifact
+        run: |
+          zip -r python-app.zip release/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-app
+          path: python-app.zip
