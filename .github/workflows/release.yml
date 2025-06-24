@@ -35,4 +35,3 @@ jobs:
         with:
           name: python-app
           path: python-app.zip
-          
