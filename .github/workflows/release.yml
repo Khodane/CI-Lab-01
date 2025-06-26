@@ -1,37 +1,57 @@
-name: CD Python Artifact
+name: Deploy to GitHub Pages 
 
-on:
-  push:
-    branches: [main]
+ 
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+on: 
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+  push: 
 
-      - name: Run tests
-        run: |
-          pip install -r requirements.txt
-          python -m unittest discover
+    branches: 
 
-      - name: Create artifact directory
-        run: |
-          mkdir -p release
-          cp *.py release/
+      - main 
 
-      - name: Compress artifact
-        run: |
-          zip -r python-app.zip release/
+ 
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-app
-          path: python-app.zip
+permissions: 
+
+  contents: read 
+
+  pages: write 
+
+  id-token: write 
+
+ 
+
+jobs: 
+
+  deploy: 
+
+    runs-on: ubuntu-latest 
+
+    steps: 
+
+      - name: Checkout code 
+
+        uses: actions/checkout@v4 
+
+ 
+
+      - name: Setup Pages 
+
+        uses: actions/configure-pages@v3 
+
+ 
+
+      - name: Upload static site 
+
+        uses: actions/upload-pages-artifact@v3 
+
+        with: 
+
+          path: 'site' 
+
+ 
+
+      - name: Deploy to GitHub Pages 
+
+        uses: actions/deploy-pages@v4 
